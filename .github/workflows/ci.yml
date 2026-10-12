@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      MPLBACKEND: Agg
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      - name: Install dependencies (from uv.lock)
+        run: uv sync --locked
+
+      - name: Lint
+        run: uv run ruff check src tests scripts
+
+      - name: Unit tests
+        run: uv run pytest
+
+      - name: Notebook smoke tests (synthetic data, no network)
+        run: uv run pytest -m notebook
+
+      - name: Build package
+        run: uv build

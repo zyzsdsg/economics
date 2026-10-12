@@ -1,0 +1,73 @@
+# Variable registry for the standardised datasets in data/processed/.
+#
+# Every modelling variable is listed with its units and how it is constructed.
+# Inflation *rates* are never stored in the parquet files: they are computed from
+# index levels with economic_lab.data.transforms so that q/q, y/y and log changes
+# cannot be confused.
+
+quarterly:
+  brent_usd:   {units: "USD per barrel", source: brent_daily, construction: "quarterly mean of business-day prices (>=80% coverage)"}
+  nzd_usd:     {units: "USD per NZD", source: nzd_usd_daily, construction: "quarterly mean of daily rates"}
+  oil_nzd:     {units: "NZD per barrel", source: "brent_daily, nzd_usd_daily", construction: "daily brent_usd / nzd_usd on common dates, then quarterly mean"}
+  igrea:       {units: "percent deviation from trend", source: dallasfed_igrea, construction: "quarterly mean of monthly values"}
+  cpi:         {units: "index", source: "rbnz_cpi (M1), else nz_cpi_oecd (2015=100) as fallback", construction: "level as published; not seasonally adjusted"}
+  # All other RBNZ quarterly variables: see rbnz_series below (re-dated to quarter start).
+  # Daily RBNZ variables (twi, ocr, bank_bill_90d, govt_bond_10y): quarterly mean of business days.
+
+monthly:
+  brent_usd: {units: "USD per barrel", source: brent_daily, construction: "monthly mean"}
+  nzd_usd:   {units: "USD per NZD", source: nzd_usd_daily, construction: "monthly mean"}
+  oil_nzd:   {units: "NZD per barrel", source: "brent_daily, nzd_usd_daily", construction: "daily conversion, then monthly mean"}
+  igrea:     {units: "percent deviation from trend", source: dallasfed_igrea, construction: "as published, dates normalised to month start"}
+
+daily:
+  brent_usd: {units: "USD per barrel", source: brent_daily}
+  nzd_usd:   {units: "USD per NZD", source: nzd_usd_daily}
+  oil_nzd:   {units: "NZD per barrel", source: "brent_daily / nzd_usd_daily on common dates"}
+
+# RBNZ series used in the standardised datasets.
+# Ids were read from the "Series Definitions" sheet of each workbook (published
+# 2026-08/10). Check them with
+#     uv run python scripts/inspect_rbnz.py data/econ_data/rbnz/hm1.xlsx
+# RBNZ dates quarters by their last day; they are re-dated to the first day.
+#
+# kind: level -> index or real/nominal quantity; growth rates are derived in code.
+#       rate  -> already a rate (%, % p.a.); differences are percentage points.
+# Daily (B1/B2) series go into macro_daily and are averaged to months/quarters
+# with the same >= 80% business-day coverage rule as Brent and the FRED NZD/USD.
+rbnz_series:
+  # M1 Prices (quarterly, not seasonally adjusted)
+  cpi:              {source: rbnz_cpi, series_id: CPI.Q.C.ia,      kind: level, units: "index (base 2017Q2=1000)", sa: false}
+  cpi_tradable:     {source: rbnz_cpi, series_id: CPIT.Q.C.ia,     kind: level, units: "index", sa: false}
+  cpi_nontradable:  {source: rbnz_cpi, series_id: CPIN.Q.C.ia,     kind: level, units: "index", sa: false}
+  cpi_petrol:       {source: rbnz_cpi, series_id: CPI.Q.C07202.ia, kind: level, units: "index", sa: false}
+  cpi_ex_petrol:    {source: rbnz_cpi, series_id: CPI.Q.ZC21.ia,   kind: level, units: "index", sa: false}
+  ppi_inputs:       {source: rbnz_cpi, series_id: PPI06.Q.T0I1.ia, kind: level, units: "index", sa: false}
+  core_sfm_yy:      {source: rbnz_cpi, series_id: CPI.Q.ZC43.iay,  kind: rate,  units: "% y/y (sectoral factor model)", sa: false}
+  # M5 GDP (quarterly, seasonally adjusted, chain-volume real NZD m)
+  gdp_real:         {source: rbnz_gdp, series_id: GDP06.Q.QT0.rs,  kind: level, units: "NZD m, real, s.a.", sa: true}
+  gdp_nominal:      {source: rbnz_gdp, series_id: GDE.Q.EY.NS,     kind: level, units: "NZD m, nominal, s.a.", sa: true}
+  consumption_real: {source: rbnz_gdp, series_id: GDE.Q.EC1.RS,    kind: level, units: "NZD m, real, s.a.", sa: true}
+  inv_resid_real:   {source: rbnz_gdp, series_id: GDE.Q.EI24.RS,   kind: level, units: "NZD m, real, s.a.", sa: true}
+  inv_other_real:   {source: rbnz_gdp, series_id: GDE.Q.EI25.RS,   kind: level, units: "NZD m, real, s.a.", sa: true}
+  exports_real:     {source: rbnz_gdp, series_id: GDE.Q.EX.RS,     kind: level, units: "NZD m, real, s.a.", sa: true}
+  imports_real:     {source: rbnz_gdp, series_id: GDE.Q.EM.RS,     kind: level, units: "NZD m, real, s.a.", sa: true}
+  # M9 Labour market (quarterly)
+  unemployment:     {source: rbnz_labour, series_id: HLFS.Q.L06G001.ns, kind: rate,  units: "% of labour force, s.a.", sa: true}
+  lci:              {source: rbnz_labour, series_id: LCI.Q.W1S0T0.ia,   kind: level, units: "index", sa: false}
+  # M14 Survey of expectations (quarterly)
+  infl_exp_1y:      {source: rbnz_expectations, series_id: SOE.Q.E210.na, kind: rate, units: "% y/y CPI expected 1 year ahead", sa: false}
+  infl_exp_2y:      {source: rbnz_expectations, series_id: SOE.Q.E215.na, kind: rate, units: "% y/y CPI expected 2 years ahead", sa: false}
+  # B1 / B2 (daily files start 2018-01). long_history: a monthly table with the same
+  # definition (monthly average) that replaces the aggregated daily series at M/Q frequency.
+  # history: the same series id in the B2 daily 1985-2017 file, joined before 2018.
+  twi:              {source: rbnz_exchange_rates, series_id: EXRT.DS41.NZB17, kind: level, units: "index, 17-currency basket", sa: false,
+                     long_history: {source: rbnz_exchange_rates_monthly, series_id: EXRT.MS41.NZB17}}
+  # B1 monthly only
+  twi_real:         {source: rbnz_exchange_rates_monthly, series_id: EXRT.MR41.NZB17, kind: level, units: "index, real TWI", sa: false}
+  ocr:              {source: rbnz_interest_rates, series_id: INM.DP1.N,       kind: rate,  units: "% p.a.", sa: false,
+                    history: {source: rbnz_interest_rates_hist, series_id: INM.DP1.N}}
+  bank_bill_90d:    {source: rbnz_interest_rates, series_id: INM.DB03.NZZV,   kind: rate,  units: "% p.a.", sa: false,
+                    history: {source: rbnz_interest_rates_hist, series_id: INM.DB03.NZZV}}
+  govt_bond_10y:    {source: rbnz_interest_rates, series_id: INM.DG110.NZZCF, kind: rate,  units: "% p.a.", sa: false,
+                    history: {source: rbnz_interest_rates_hist, series_id: INM.DG110.NZZCF}}

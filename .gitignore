@@ -1,20 +1,56 @@
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
-._*
-.Spotlight-V100
-.Trashes
-.venv/
-venv/
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
-*.pyo
+*$py.class
 
-.pytest_cache/
-.coverage
-.coverage.*
-htmlcov/
-.tox/
+# Virtual environments
+.venv/
+venv/
+env/
 
+# Distribution / packaging
+*.egg-info/
+dist/
+build/
+*.egg
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Jupyter Notebook checkpoints
 .ipynb_checkpoints/
+
+# Test and coverage
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+.mypy_cache/
+
+# Data files (large downloads - keep only synthetic/small test data)
+data/econ_data/**/*.xls
+data/econ_data/**/*.xlsx
+data/econ_data/**/*.csv
+data/econ_data/**/*.parquet
+!data/econ_data/synthetic/
+
+# Environment files
+.env
+.env.local
+
+# Logs
+*.log
+
+# OS files
+Thumbs.db
+# Processed datasets are rebuilt from raw files (scripts/build_datasets.py)
+data/processed/
+
+# Download artefacts: partial files and archived vintages of raw data
+*.part
+data/econ_data/**/_vintages/
