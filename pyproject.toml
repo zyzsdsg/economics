@@ -1,11 +1,60 @@
 [project]
 name = "economics"
 version = "0.1.0"
-description = "Add your description here"
+description = "Economic Modelling Laboratory: oil-price shocks and New Zealand inflation, from first principles to production models."
 readme = "README.md"
-requires-python = ">=3.10"
+license = "MIT"
+requires-python = ">=3.11"
 dependencies = [
     "numpy>=2.2.6",
     "pandas>=2.3.3",
+    "requests>=2.34.2",
     "seaborn>=0.13.2",
+    "matplotlib>=3.9",
+    "scipy>=1.14",
+    "statsmodels>=0.14.4",
+    "scikit-learn>=1.5",
+    "pyarrow>=17.0",
+    "pyyaml>=6.0",
+    "xlrd>=2.0.1",     # legacy .xls files (EIA)
+    "openpyxl>=3.1",   # .xlsx files (RBNZ, World Bank, Dallas Fed)
 ]
+
+[project.optional-dependencies]
+# Heavier stacks used from Phase 3 onwards; kept optional so the core installs quickly.
+ml = ["xgboost>=2.1"]
+bayes = ["pymc>=5.16", "arviz>=0.19"]
+cge = ["pyomo>=6.8"]
+interactive = ["ipywidgets>=8.1"]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "ruff>=0.6",
+    "ipykernel>=6.29",
+    "nbformat>=5.10",
+    "nbclient>=0.10",
+]
+
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra -m \"not notebook and not network\""
+markers = [
+    "notebook: executes notebooks end-to-end (slower)",
+    "network: requires internet access",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "NPY"]
+ignore = ["E501"]

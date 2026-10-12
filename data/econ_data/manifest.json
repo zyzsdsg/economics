@@ -1,0 +1,146 @@
+{
+  "files": {
+    "brent_daily": {
+      "method": "automatic",
+      "path": "eia/brent_daily.xls",
+      "recorded_at_utc": "2026-10-12T10:23:26+00:00",
+      "sha256": "a7b7074cb3e1e4b7418cdc7f73ccf831226d55f9365c136be56c8edc3a1e2182",
+      "size_bytes": 452096,
+      "url": "https://www.eia.gov/dnav/pet/hist_xls/RBRTEd.xls"
+    },
+    "brent_monthly": {
+      "http_headers": {
+        "Content-Type": "application/vnd.ms-excel",
+        "ETag": "\"80b6231c5e56dd1:0\"",
+        "Last-Modified": "Wed, 07 Oct 2026 13:16:49 GMT"
+      },
+      "method": "automatic",
+      "path": "eia/brent_monthly.xls",
+      "recorded_at_utc": "2026-10-12T10:23:26+00:00",
+      "sha256": "834d47313c17b70c8dd7ed29b70502373f28eee91e6a800fd6efb47543aebc53",
+      "size_bytes": 55296,
+      "url": "https://www.eia.gov/dnav/pet/hist_xls/RBRTEm.xls"
+    },
+    "dallasfed_igrea": {
+      "http_headers": {
+        "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "ETag": "4df6c67978e04ecb8d92ac976c74aae8",
+        "Last-Modified": "Mon, 14 Sep 2026 18:33:45 GMT"
+      },
+      "method": "automatic",
+      "path": "dallasfed/igrea.xlsx",
+      "recorded_at_utc": "2026-10-12T10:23:28+00:00",
+      "sha256": "edfafd9b139c87ebdc06e8ccc50106f669c4e3c5193b50e6042618eab37c1be9",
+      "size_bytes": 27832,
+      "url": "https://www.dallasfed.org/-/media/Documents/research/igrea/igrea.xlsx"
+    },
+    "nz_cpi_oecd": {
+      "http_headers": {
+        "Content-Type": "application/csv",
+        "Last-Modified": "Thu, 15 May 2025 19:16:38 GMT"
+      },
+      "method": "automatic",
+      "path": "fred/NZLCPIALLQINMEI.csv",
+      "recorded_at_utc": "2026-10-12T10:23:27+00:00",
+      "sha256": "9952c8c84a86653cc1d7d26c47e78dee19f8fcf1781cc4684e1a33e8922da228",
+      "size_bytes": 13593,
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=NZLCPIALLQINMEI"
+    },
+    "nzd_usd_daily": {
+      "http_headers": {
+        "Content-Type": "application/csv",
+        "Last-Modified": "Mon, 05 Oct 2026 20:16:56 GMT"
+      },
+      "method": "automatic",
+      "path": "fred/DEXUSNZ.csv",
+      "recorded_at_utc": "2026-10-12T10:23:27+00:00",
+      "sha256": "49a06beab71d1e327963beb4f0ee64891aaae0c9c22fa71621179a8a80a7bc3b",
+      "size_bytes": 258355,
+      "url": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=DEXUSNZ"
+    },
+    "rbnz_cpi": {
+      "method": "manual",
+      "path": "rbnz/hm1.xlsx",
+      "recorded_at_utc": "2026-10-12T21:29:37+00:00",
+      "sha256": "523a1326160febcef4d41a445b7ea81c0ab63fb77377806f55359a837264fb0d",
+      "size_bytes": 48280,
+      "url": "https://www.rbnz.govt.nz/-/media/project/sites/rbnz/files/statistics/series/m/m1/hm1.xlsx"
+    },
+    "rbnz_exchange_rates": {
+      "method": "manual",
+      "path": "rbnz/hb1-daily.xlsx",
+      "recorded_at_utc": "2026-10-12T21:29:37+00:00",
+      "sha256": "e9f9c88c7dde1ae8a8c5e9155732ab547970814f2e4d5c19092793611f18275a",
+      "size_bytes": 297928,
+      "url": "https://www.rbnz.govt.nz/-/media/project/sites/rbnz/files/statistics/series/b/b1/hb1-daily.xlsx"
+    },
+    "rbnz_exchange_rates_monthly": {
+      "method": "manual",
+      "path": "rbnz/hb1-monthly.xlsx",
+      "recorded_at_utc": "2026-10-12T21:47:05+00:00",
+      "sha256": "1f734f43704a761ecc2ab0bd39601adc66bf7fdd6d41caa46d193f6caa404e79",
+      "size_bytes": 58726,
+      "url": "https://www.rbnz.govt.nz/-/media/project/sites/rbnz/files/statistics/series/b/b1/hb1-monthly.xlsx"
+    },
+    "rbnz_expectations": {
+      "method": "manual",
+      "path": "rbnz/hm14.xlsx",
+      "recorded_at_utc": "2026-10-12T21:29:37+00:00",
+      "sha256": "93919c29647295dd24ca13b3d16b7ce6dc0c165c07dcc6ce257d51bcb8755838",
+      "size_bytes": 33387,
+      "url": null
+    },
+    "rbnz_gdp": {
+      "method": "manual",
+      "path": "rbnz/hm5.xlsx",
+      "recorded_at_utc": "2026-10-12T21:29:37+00:00",
+      "sha256": "9437e238eefe3141f0b80232e500eceb3d479945662eb0122c876df4c7944fbc",
+      "size_bytes": 71077,
+      "url": "https://www.rbnz.govt.nz/-/media/project/sites/rbnz/files/statistics/series/m/m5/hm5.xlsx"
+    },
+    "rbnz_interest_rates": {
+      "method": "manual",
+      "path": "rbnz/hb2-daily-close.xlsx",
+      "recorded_at_utc": "2026-10-12T21:29:37+00:00",
+      "sha256": "66f2504f0ecd0ec00d68e4de27095fb6a58be984d95e8978bb15c07c2df79e2e",
+      "size_bytes": 432598,
+      "url": "https://www.rbnz.govt.nz/-/media/project/sites/rbnz/files/statistics/series/b/b2/hb2-daily-close.xlsx"
+    },
+    "rbnz_interest_rates_hist": {
+      "method": "manual",
+      "path": "rbnz/hb2-daily-close-1985-2017.xlsx",
+      "recorded_at_utc": "2026-10-12T21:55:40+00:00",
+      "sha256": "6320f6f2a793976e12da8abbbd51e89dc0245d22e3968307acd1e41c0559c3e2",
+      "size_bytes": 433266,
+      "url": null
+    },
+    "rbnz_interest_rates_monthly": {
+      "method": "manual",
+      "path": "rbnz/hb2-monthly-close.xlsx",
+      "recorded_at_utc": "2026-10-12T21:47:05+00:00",
+      "sha256": "e3b9a4ea07858b72ded5d4cdd89154f0c9ac4fcf4a381a5d4ce3cf5d91e2c091",
+      "size_bytes": 20583,
+      "url": "https://www.rbnz.govt.nz/-/media/project/sites/rbnz/files/statistics/series/b/b2/hb2-monthly-close.xlsx"
+    },
+    "rbnz_labour": {
+      "method": "manual",
+      "path": "rbnz/hm9.xlsx",
+      "recorded_at_utc": "2026-10-12T21:29:37+00:00",
+      "sha256": "d2137d6fd95f3cab48dd08fd67476157c24a2ee86f3d2a0fbc969f3c13faab16",
+      "size_bytes": 24067,
+      "url": null
+    },
+    "worldbank_pinksheet_monthly": {
+      "http_headers": {
+        "Content-Type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "Last-Modified": "Fri, 02 Oct 2026 18:57:55 GMT"
+      },
+      "method": "automatic",
+      "path": "worldbank/CMO-Historical-Data-Monthly.xlsx",
+      "recorded_at_utc": "2026-10-12T10:23:29+00:00",
+      "sha256": "ea1c350827878ea3bbe30e3cda16a13fd3bd5b409b8458940dc94a36b5a33154",
+      "size_bytes": 586099,
+      "url": "https://thedocs.worldbank.org/en/doc/74e8be41ceb20fa0da750cda2f6b9e4e-0050012026/related/CMO-Historical-Data-Monthly.xlsx"
+    }
+  }
+}
